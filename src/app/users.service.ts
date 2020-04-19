@@ -10,7 +10,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UsersService {
 
   //Set up the URL
 
@@ -26,18 +26,26 @@ export class AuthService {
       host = l.hostname + ((l.port.length>0)?':' + l.port:'');
     }
 
-    this.url = `${l.protocol}//${host}/api/auth/`;
+    this.url = `${l.protocol}//${host}/api/users/`;
   }
 
-  register(user: User): Observable<User>{
-    return this.http.post<User>(this.url + 'register', user, httpOptions);
+  createUser(user: User): Observable<User>{
+    return this.http.post<User>(this.url, user, httpOptions);
   }
 
-  logIn(user: User): Observable<User>{
-    return this.http.post<User>(this.url + 'login', user, httpOptions);
+  getUsers(): Observable<User>{
+    return this.http.get<User>(this.url, httpOptions);
   }
 
-  logOut(): Observable<User>{
-    return this.http.delete<User>(this.url + 'logout');
+  getUser(id:String): Observable<User>{
+    return this.http.get<User>(`${this.url}${id}`, httpOptions);
+  }
+
+  updateUser(user: User): Observable<User>{
+    return this.http.put<User>(this.url, user, httpOptions);
+  }
+
+  deleteUser(id: string): Observable<User>{
+    return this.http.delete<User>(this.url + id);
   }
 }
