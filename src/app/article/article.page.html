@@ -1,3 +1,4 @@
+ 
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -10,19 +11,21 @@
 <ion-content>
     <ion-item *ngIf="!article">
       <ion-label ion-text-center>
-          <ion-spinner></ion-spinner>
+        <ion-spinner></ion-spinner>
         </ion-label>
       </ion-item>
     
       <ion-card *ngIf="article">
     
         <ion-card-header>
-          <ion-card-title>{{ article.first_name }} {{ article.last_name }}</ion-card-title>
+          <ion-card-title>{{ article.title }}</ion-card-title>
         </ion-card-header>
         
         <ion-list>
-          <ion-item>{{ article.name  }}</ion-item>
-          <ion-item>{{ article.email  }}</ion-item>
+          <ion-item>{{ article.description  }}</ion-item>
+          <ion-item>{{ article.keywords  }}</ion-item>
+          <ion-item>{{ article.body  }}</ion-item>
+          <ion-item>{{ article.published  }}</ion-item>
         </ion-list>
     
       </ion-card>
@@ -38,10 +41,11 @@
             <ion-icon name="create"></ion-icon>
           </ion-fab-button>
     
-          <ion-fab-button color="danger" [routerLink]="['/article-delete', article._id]">
+          <!-- <ion-fab-button color="danger" [routerLink]="['/article-delete', article._id]"> -->
+          <ion-fab-button color="danger" (click)="deleteArticle(article._id)">
             <ion-icon name="trash"></ion-icon>
           </ion-fab-button>
-    
+
         </ion-fab-list>
       </ion-fab>
 

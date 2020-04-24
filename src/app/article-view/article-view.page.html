@@ -12,13 +12,13 @@
   </ion-item>
 
   <ion-list *ngIf="articles">
-    <ion-item *ngFor="let user of articles" [routerLink]="['/user', user._id]">
-      <ion-label>{{ user.username }}</ion-label>
+    <ion-item *ngFor="let article of articles" [routerLink]="['/article', article._id]">
+      <ion-label>{{ article.title}}</ion-label>
     </ion-item>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button  color="secondary" [routerLink]="['/user-create']">
+    <ion-fab-button  color="secondary" [routerLink]="['/article-create']">
       <ion-icon name="person-add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
