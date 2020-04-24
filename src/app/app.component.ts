@@ -26,6 +26,11 @@ export class AppComponent {
       url: '/register',
       icon: 'person-add'
     },
+    {
+      title: 'Articles',
+      url: '/articles',
+      icon: 'book'
+    },
   {
     title: 'Users',
     url: '/users',

@@ -38,6 +38,30 @@ const routes: Routes = [
   {
     path: 'user-create',
     loadChildren: () => import('./user-create/user-create.module').then( m => m.UserCreatePageModule)
+  },
+  {
+    path: 'articles',
+    loadChildren: () => import('./articles/articles.module').then( m => m.ArticlesPageModule)
+  },
+ {
+    path: 'article-create',
+    loadChildren: () => import('./article-create/article-create.module').then( m => m.ArticleCreatePageModule)
+  },
+  {
+    path: 'article-edit',
+    loadChildren: () => import('./article-edit/article-edit.module').then( m => m.ArticleEditPageModule)
+  },
+  {
+    path: 'article',
+    loadChildren: () => import('./article/article.module').then( m => m.ArticlePageModule)
+  },
+  {
+    path: 'article-delete',
+    loadChildren: () => import('./article-delete/article-delete.module').then( m => m.ArticleDeletePageModule)
+  },
+  {
+    path: 'article-view',
+    loadChildren: () => import('./article-view/article-view.module').then( m => m.ArticleViewPageModule)
   }
 ];
 
