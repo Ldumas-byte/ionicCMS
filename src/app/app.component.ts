@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { MenuController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -41,6 +41,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
+    public menuCtrl: MenuController,
     private statusBar: StatusBar
   ) {
     this.initializeApp();
@@ -52,4 +53,17 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  openMenu() {
+    this.menuCtrl.open();
+  }
+ 
+  closeMenu() {
+    this.menuCtrl.close();
+  }
+ 
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+
 }

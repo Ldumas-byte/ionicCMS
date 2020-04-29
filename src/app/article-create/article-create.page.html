@@ -1,19 +1,46 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>articleCreate</ion-title>
   </ion-toolbar>
 </ion-header>
 
-    <ion-item>
-      <ion-label>articletitle</ion-label>
-      <ion-input [(ngModel)]="article.title" title="article" type="text"></ion-input>
-      <div *ngIf="errors.articletitle"> {{ errors.articletitle }} </div>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label>Article Name</ion-label>
-      <ion-input [(ngModel)]="article.title" title="title" type="text"></ion-input>
-    </ion-item>
-    
-    <ion-button color="primary" expand="full" (click)="onSubmit()">Submit</ion-button>
-  </ion-content>
+<ion-content *ngIf="!article">
+  <ion-label ion-text-center>
+    <ion-spinner></ion-spinner>
+  </ion-label>
+</ion-content>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input [(ngModel)]="article.title" name="title" type="text"></ion-input>
+    <div *ngIf="errors.title"> {{ errors.title }} </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Decription</ion-label>
+    <ion-input [(ngModel)]="article.description" name="description" type="text"></ion-input>
+    <div *ngIf="errors.description"> {{ errors.description }} </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Keywords</ion-label>
+    <ion-input [(ngModel)]="article.keywords" name="keywords" type="text"></ion-input>
+    <div *ngIf="errors.keywords"> {{ errors.keywords }} </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Body</ion-label>
+    <ion-input [(ngModel)]="article.body" name="body" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Published</ion-label>
+    <ion-input [(ngModel)]="article.published" name="published" type="date"></ion-input>
+  </ion-item>
+
+  <ion-button color="primary" expand="full" (click)="onSubmit()">Submit</ion-button>
+</ion-content>

@@ -1,44 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticlesService } from '../articles.service';
-import { Article } from '../article.model';
-import { Router } from '@angular/router';
+import { Article } from '../article.model'; 
 
 @Component({
-  selector: 'app-article-view',
-  templateUrl: './article-view.component.html',
-  styleUrls: ['./article-view.component.scss']
+  selector: 'app-article-edit',
+  templateUrl: './article-edit.page.html',
+  styleUrls: ['./article-edit.page.scss'],
 })
 export class ArticleEditPage implements OnInit {
 
   article: Article;
+  errors: any = {};
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private articlesService: ArticlesService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.getArticle(id);
+    this.activatedRoute.params.subscribe(params=>{
+      this.getArticle(params['articleId']);
+    });
   }
 
-  getArticle(id): void {
-    this.articlesService.getArticle(id).subscribe(
-      (response: any) => {
-        this.article = response.article
+  response(response): void{
+
+    if(response.success===false){
+
+      if( response.errors.name == 'MissingArticlenameError' ){
+        this.errors.articlename = 'Please enter a articlename';
+      }
+
+      if( response.errors.name == 'ArticleExistsError' ){
+        this.errors.articlename = 'A article with the given articlename is already registered';
+      }
+
+      if( response.errors.email ){
+        this.errors.email = response.errors.errors.email.message;
+      }
+
+    }
+
+    if(response.success===true){
+      this.router.navigate(['/articles']);
+    }
+  }
+
+  onSubmit(): void{
+    this.articlesService.updateArticle(this.article).subscribe(
+      (response:any) => {
+        this.response(response);
       }
     );
   }
 
-  deleteArticle(id: string): void {
-    if (confirm("Are you sure to delete " + this.article.title)) {
-      this.articlesService.deleteArticle(id).subscribe(
-        () => { this.router.navigate(['/articles']) }
-      );
-    }
+  getArticle(id:string):void {
+    this.articlesService.getArticle(id).subscribe(
+      (response:any)=>{
+        this.article = response.article;
+      }
+    );
   }
 
 }
